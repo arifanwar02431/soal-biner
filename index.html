@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latihan Koding: Konversi Biner &amp; Desimal — Kelas 6 MIN 1 Kota Malang</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: #ffffff !important;
+      }
+      .print-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-blue-950 to-teal-900 text-white shadow-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-200 text-xs font-semibold tracking-wide uppercase mb-1.5">
+          <span>Koding • Kelas 6</span>
+          <span>•</span>
+          <span>MIN 1 Kota Malang</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Lembar Kerja Interaktif: Konversi Bilangan Biner &amp; Desimal</h1>
+        <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Isi seluruh langkah perhitungan dan jawaban akhir, lalu kumpulkan untuk melihat nilai</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 no-print">
+        <button id="btnSubmitTop" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold shadow-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Kumpulkan &amp; Lihat Nilai
+        </button>
+        <button id="btnPrint" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-medium border border-white/15 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/></svg>
+          Cetak / PDF
+        </button>
+        <button id="btnResetModal" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 text-xs sm:text-sm font-medium border border-rose-400/30 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Reset Isian
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+    <!-- Score Banner (Muncul Hanya Jika Sudah Dikumpulkan) -->
+    <section id="scoreResultBanner" class="hidden rounded-2xl bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white p-5 sm:p-6 shadow-lg border border-emerald-400/30 print-card">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold uppercase tracking-wider">
+            Hasil Evaluasi Koding Kelas 6
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold" id="scoreStudentSummary">Hasil Pekerjaan Siswa</h2>
+          <p class="text-xs sm:text-sm text-emerald-100/90">
+            Catatan Penilaian: Soal hanya dihitung <strong>Benar</strong> apabila <strong>seluruh langkah cara DAN jawaban akhirnya benar</strong>.
+          </p>
+        </div>
+        <div class="flex items-center gap-4 bg-white/10 rounded-xl px-5 py-3 border border-white/15 shrink-0">
+          <div class="text-center">
+            <span class="block text-[11px] uppercase tracking-wider text-emerald-200 font-semibold">Nilai Akhir</span>
+            <span id="finalScoreValue" class="font-mono-code text-3xl sm:text-4xl font-extrabold text-white">0</span>
+          </div>
+          <div class="h-10 w-px bg-white/20"></div>
+          <div class="text-xs sm:text-sm space-y-0.5">
+            <div>Total Benar: <strong id="totalCorrectCount" class="font-mono-code text-emerald-300">0 / 30</strong></div>
+            <div>Bagian A: <strong id="secACorrectCount" class="font-mono-code">0 / 15</strong></div>
+            <div>Bagian B: <strong id="secBCorrectCount" class="font-mono-code">0 / 15</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Identity & Progress Card -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-5 print-card">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label for="studentName" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Nama Lengkap Siswa</label>
+          <input id="studentName" type="text" placeholder="Ketik nama lengkap..." class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+        </div>
+        <div>
+          <label for="studentClass" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Kelas</label>
+          <select id="studentClass" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+            <option value="">-- Pilih Kelas --</option>
+            <option value="6A">Kelas 6A</option>
+            <option value="6B">Kelas 6B</option>
+            <option value="6C">Kelas 6C</option>
+            <option value="6D">Kelas 6D</option>
+            <option value="6E">Kelas 6E</option>
+            <option value="6F">Kelas 6F</option>
+            <option value="6G">Kelas 6G</option>
+          </select>
+        </div>
+        <div>
+          <label for="studentAbsen" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Nomor Absen</label>
+          <input id="studentAbsen" type="number" min="1" max="50" placeholder="Contoh: 12" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+          <span>Progres Pengerjaan (Cara + Jawaban):</span>
+          <span id="progressText" class="font-bold text-teal-700">0 / 30 Soal Lengkap (0%)</span>
+        </div>
+        <div class="w-full sm:w-64 h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+          <div id="progressBar" class="h-full bg-teal-600 transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs & Guide Toggle -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print">
+      <div class="inline-flex p-1 rounded-xl bg-slate-200/80 border border-slate-300/60">
+        <button id="tabBtnA" type="button" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-white text-slate-900 shadow-sm">
+          Bagian A: Biner ke Desimal (15)
+        </button>
+        <button id="tabBtnB" type="button" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900">
+          Bagian B: Desimal ke Biner (15)
+        </button>
+        <button id="tabBtnAll" type="button" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900">
+          Semua Soal (30)
+        </button>
+      </div>
+
+      <button id="btnToggleGuide" type="button" class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs sm:text-sm font-semibold transition">
+        <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+        <span id="guideToggleLabel">Sembunyikan Panduan Cara</span>
+      </button>
+    </div>
+
+    <!-- Guide Panel (Contoh Cara sesuai format baru) -->
+    <section id="guidePanel" class="bg-amber-50/70 rounded-xl border border-amber-200 p-4 sm:p-5 space-y-3 print-card">
+      <div class="flex items-center gap-2 text-amber-900 font-bold text-sm sm:text-base">
+        <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>Panduan Pengisian Cara (Penting: Jika Cara Salah, Soal Dinilai Salah!)</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <div class="bg-white rounded-lg p-3.5 border border-amber-200/80 space-y-1.5">
+          <p class="font-bold text-slate-900">1. Contoh Biner ke Desimal (Bagian A)</p>
+          <p>Misalkan soal biner <span class="font-mono-code font-bold text-teal-800">1101</span>:</p>
+          <div class="bg-slate-50 p-2 rounded border border-slate-200 font-mono-code text-xs space-y-1">
+            <div>Cara 1 (Pengali): 1×<strong>8</strong> + 1×<strong>4</strong> + 0×<strong>2</strong> + 1×<strong>1</strong></div>
+            <div>Cara 2 (Hasil Kali): <strong>8</strong> + <strong>4</strong> + <strong>0</strong> + <strong>1</strong> = <strong>13</strong></div>
+          </div>
+          <p class="text-xs text-slate-500">Isi sendiri angka pengali pangkat 2 dari kanan ke kiri (1, 2, 4, 8, 16, 32, 64, 128), lalu tulis hasil kalinya dan jumlahkan.</p>
+        </div>
+        <div class="bg-white rounded-lg p-3.5 border border-amber-200/80 space-y-1.5">
+          <p class="font-bold text-slate-900">2. Contoh Desimal ke Biner (Bagian B)</p>
+          <p>Misalkan soal desimal <span class="font-mono-code font-bold text-amber-800">13</span>, bagi berulang dengan <strong>2</strong> hingga hasilnya <strong>0</strong>:</p>
+          <div class="bg-slate-50 p-2 rounded border border-slate-200 font-mono-code text-xs space-y-0.5">
+            <div>13 / <strong>2</strong> = <strong>6</strong> sisa <strong>1</strong></div>
+            <div><strong>6</strong> / <strong>2</strong> = <strong>3</strong> sisa <strong>0</strong></div>
+            <div><strong>3</strong> / <strong>2</strong> = <strong>1</strong> sisa <strong>1</strong></div>
+            <div><strong>1</strong> / <strong>2</strong> = <strong>0</strong> sisa <strong>1</strong></div>
+            <div class="pt-1 text-teal-800 font-bold">Jawaban (baca sisa dari bawah ke atas): <strong>1</strong> <strong>1</strong> <strong>0</strong> <strong>1</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section A Container -->
+    <section id="sectionAContainer" class="space-y-4">
+      <div class="border-b border-slate-200 pb-2">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900">Bagian A. Konversi Bilangan Biner ke Desimal (15 Soal)</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Isi kotak pengali (<span class="font-mono-code">1 × ...</span>), kotak hasil perkaliannya, serta kotak Hasil Desimal. Jika salah satu langkah salah, soal dinilai salah.</p>
+      </div>
+      <div id="listSectionA" class="space-y-4"></div>
+    </section>
+
+    <!-- Section B Container -->
+    <section id="sectionBContainer" class="space-y-4 hidden">
+      <div class="border-b border-slate-200 pb-2">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900">Bagian B. Konversi Bilangan Desimal ke Biner (15 Soal)</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Lengkapi pembagian berulang (<span class="font-mono-code">... / ... = ... sisa ...</span>) dan tulis setiap digit jawaban biner dari sisa paling bawah ke atas.</p>
+      </div>
+      <div id="listSectionB" class="space-y-4"></div>
+    </section>
+
+    <!-- Bottom Submit Section -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
+      <div>
+        <h3 class="text-sm sm:text-base font-bold text-slate-900">Sudah selesai mengerjakan semua soal?</h3>
+        <p class="text-xs text-slate-500">Pastikan seluruh kotak cara dan jawaban akhir pada Bagian A dan Bagian B sudah terisi sebelum dikumpulkan.</p>
+      </div>
+      <button id="btnSubmitBottom" type="button" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-sm transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Kumpulkan Jawaban &amp; Lihat Nilai
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Reset Confirmation Modal -->
+  <div id="resetModal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-slate-900">Reset Semua Isian?</h3>
+          <p class="text-xs text-slate-500">Semua langkah cara, jawaban, dan status pengumpulan nilai akan dikosongkan.</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button id="btnCancelReset" type="button" class="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 text-xs sm:text-sm font-semibold hover:bg-slate-100 transition">Batal</button>
+        <button id="btnConfirmReset" type="button" class="px-4 py-2 rounded-lg bg-rose-600 text-white text-xs sm:text-sm font-semibold hover:bg-rose-700 transition">Ya, Kosongkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="fixed bottom-4 right-4 z-50 hidden bg-slate-900 text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl shadow-lg border border-slate-700 no-print">
+    <span id="toastMessage">Tersimpan otomatis</span>
+  </div>
+
+  <footer class="mt-10 border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500 no-print">
+    Media Pembelajaran Interaktif Koding Kelas 6 — MIN 1 Kota Malang
+  </footer>
+
+  <script>
+    const SOAL_BINER_KE_DESIMAL = [
+      "1010",
+      "1101",
+      "111",
+      "1001",
+      "1110",
+      "10110",
+      "11001",
+      "100110",
+      "111010",
+      "101011",
+      "1000101",
+      "1101100",
+      "10110101",
+      "11001110",
+      "11110011"
+    ];
+
+    const SOAL_DESIMAL_KE_BINER = [
+      6,
+      9,
+      12,
+      15,
+      19,
+      27,
+      34,
+      45,
+      53,
+      60,
+      75,
+      98,
+      135,
+      172,
+      215
+    ];
+
+    const STORAGE_KEY = "min1_kelas6_koding_biner_desimal_v2";
+
+    let appState = {
+      studentName: "",
+      studentClass: "",
+      studentAbsen: "",
+      activeTab: "A",
+      showGuide: true,
+      isSubmitted: false,
+      sectionA: {},
+      sectionB: {}
+    };
+
+    function getStepCountForDecimal(decVal) {
+      let n = decVal;
+      let count = 0;
+      while (n > 0) {
+        n = Math.floor(n / 2);
+        count++;
+      }
+      return count;
+    }
+
+    function initDefaultState() {
+      appState.isSubmitted = false;
+      appState.sectionA = {};
+      appState.sectionB = {};
+
+      SOAL_BINER_KE_DESIMAL.forEach((binStr, idx) => {
+        const len = binStr.length;
+        appState.sectionA[idx] = {
+          multipliers: Array(len).fill(""),
+          terms: Array(len).fill(""),
+          finalAnswer: ""
+        };
+      });
+
+      SOAL_DESIMAL_KE_BINER.forEach((decVal, idx) => {
+        const stepCount = getStepCountForDecimal(decVal);
+        const steps = [];
+        for (let s = 0; s < stepCount; s++) {
+          steps.push({
+            dividend: s === 0 ? String(decVal) : "",
+            divisor: "",
+            quotient: "",
+            remainder: ""
+          });
+        }
+        appState.sectionB[idx] = {
+          steps: steps,
+          answerBits: Array(stepCount).fill("")
+        };
+      });
+    }
+
+    function loadSavedState() {
+      initDefaultState();
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") {
+          appState.studentName = parsed.studentName || "";
+          appState.studentClass = parsed.studentClass || "";
+          appState.studentAbsen = parsed.studentAbsen || "";
+          appState.activeTab = parsed.activeTab || "A";
+          appState.showGuide = parsed.showGuide !== undefined ? parsed.showGuide : true;
+          appState.isSubmitted = Boolean(parsed.isSubmitted);
+
+          if (parsed.sectionA) {
+            SOAL_BINER_KE_DESIMAL.forEach((binStr, idx) => {
+              const saved = parsed.sectionA[idx];
+              const len = binStr.length;
+              if (saved) {
+                appState.sectionA[idx] = {
+                  multipliers: Array.isArray(saved.multipliers) && saved.multipliers.length === len
+                    ? saved.multipliers
+                    : Array(len).fill(""),
+                  terms: Array.isArray(saved.terms) && saved.terms.length === len
+                    ? saved.terms
+                    : Array(len).fill(""),
+                  finalAnswer: saved.finalAnswer || ""
+                };
+              }
+            });
+          }
+
+          if (parsed.sectionB) {
+            SOAL_DESIMAL_KE_BINER.forEach((decVal, idx) => {
+              const saved = parsed.sectionB[idx];
+              const stepCount = getStepCountForDecimal(decVal);
+              if (saved) {
+                const loadedSteps = [];
+                for (let s = 0; s < stepCount; s++) {
+                  const st = Array.isArray(saved.steps) && saved.steps[s] ? saved.steps[s] : {};
+                  loadedSteps.push({
+                    dividend: s === 0 ? String(decVal) : (st.dividend || ""),
+                    divisor: st.divisor || "",
+                    quotient: st.quotient || "",
+                    remainder: st.remainder || ""
+                  });
+                }
+                appState.sectionB[idx] = {
+                  steps: loadedSteps,
+                  answerBits: Array.isArray(saved.answerBits) && saved.answerBits.length === stepCount
+                    ? saved.answerBits
+                    : Array(stepCount).fill("")
+                };
+              }
+            });
+          }
+        }
+      } catch (err) {
+        // Ignore storage error
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        // Ignore storage error
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById("toastBox");
+      const text = document.getElementById("toastMessage");
+      if (!box || !text) return;
+      text.textContent = msg;
+      box.classList.remove("hidden");
+      setTimeout(() => {
+        box.classList.add("hidden");
+      }, 2500);
+    }
+
+    function parseCleanInt(val) {
+      const trimmed = String(val ?? "").trim();
+      if (!/^\d+$/.test(trimmed)) return NaN;
+      return parseInt(trimmed, 10);
+    }
+
+    // Cek apakah semua field pada soal A sudah diisi siswa
+    function isQuestionAComplete(idx) {
+      const item = appState.sectionA[idx];
+      if (!item) return false;
+      const allMult = item.multipliers.every((v) => String(v).trim() !== "");
+      const allTerms = item.terms.every((v) => String(v).trim() !== "");
+      const hasFinal = String(item.finalAnswer).trim() !== "";
+      return allMult && allTerms && hasFinal;
+    }
+
+    // Cek apakah semua field pada soal B sudah diisi siswa
+    function isQuestionBComplete(idx) {
+      const item = appState.sectionB[idx];
+      if (!item) return false;
+      const allSteps = item.steps.every((st, sIdx) => {
+        const divOk = sIdx === 0 || String(st.dividend).trim() !== "";
+        return divOk && String(st.divisor).trim() !== "" && String(st.quotient).trim() !== "" && String(st.remainder).trim() !== "";
+      });
+      const allBits = item.answerBits.every((b) => String(b).trim() !== "");
+      return allSteps && allBits;
+    }
+
+    // Evaluasi kebenaran Soal A (Cara Pengali + Hasil Kali + Jawaban Akhir HARUS benar semua)
+    function evaluateQuestionA(idx) {
+      const binStr = SOAL_BINER_KE_DESIMAL[idx];
+      const digits = binStr.split("").map((d) => parseInt(d, 10));
+      const len = digits.length;
+      const item = appState.sectionA[idx];
+
+      let multAllCorrect = true;
+      let termsAllCorrect = true;
+
+      for (let i = 0; i < len; i++) {
+        const expectedWeight = Math.pow(2, len - 1 - i);
+        const expectedTerm = digits[i] * expectedWeight;
+
+        const userMult = parseCleanInt(item.multipliers[i]);
+        const userTerm = parseCleanInt(item.terms[i]);
+
+        if (userMult !== expectedWeight) multAllCorrect = false;
+        if (userTerm !== expectedTerm) termsAllCorrect = false;
+      }
+
+      const expectedFinal = parseInt(binStr, 2);
+      const userFinal = parseCleanInt(item.finalAnswer);
+      const finalCorrect = userFinal === expectedFinal;
+
+      return {
+        isCorrect: multAllCorrect && termsAllCorrect && finalCorrect,
+        multAllCorrect,
+        termsAllCorrect,
+        finalCorrect
+      };
+    }
+
+    // Evaluasi kebenaran Soal B (Semua baris pembagian berulang + Jawaban Biner HARUS benar semua)
+    function evaluateQuestionB(idx) {
+      const decVal = SOAL_DESIMAL_KE_BINER[idx];
+      const item = appState.sectionB[idx];
+      let current = decVal;
+      let stepsAllCorrect = true;
+      const expectedRemainders = [];
+
+      for (let s = 0; s < item.steps.length; s++) {
+        const expectedDividend = current;
+        const expectedDivisor = 2;
+        const expectedQuotient = Math.floor(current / 2);
+        const expectedRemainder = current % 2;
+        expectedRemainders.push(expectedRemainder);
+
+        const st = item.steps[s];
+        const uDividend = s === 0 ? decVal : parseCleanInt(st.dividend);
+        const uDivisor = parseCleanInt(st.divisor);
+        const uQuotient = parseCleanInt(st.quotient);
+        const uRemainder = parseCleanInt(st.remainder);
+
+        if (
+          uDividend !== expectedDividend ||
+          uDivisor !== expectedDivisor ||
+          uQuotient !== expectedQuotient ||
+          uRemainder !== expectedRemainder
+        ) {
+          stepsAllCorrect = false;
+        }
+        current = expectedQuotient;
+      }
+
+      const expectedBits = expectedRemainders.slice().reverse();
+      let bitsAllCorrect = true;
+      for (let b = 0; b < expectedBits.length; b++) {
+        const uBit = parseCleanInt(item.answerBits[b]);
+        if (uBit !== expectedBits[b]) {
+          bitsAllCorrect = false;
+        }
+      }
+
+      return {
+        isCorrect: stepsAllCorrect && bitsAllCorrect,
+        stepsAllCorrect,
+        bitsAllCorrect
+      };
+    }
+
+    function getBadgeHtml(section, idx) {
+      if (!appState.isSubmitted) {
+        const complete = section === "A" ? isQuestionAComplete(idx) : isQuestionBComplete(idx);
+        return {
+          text: complete ? "Lengkap Terisi" : "Belum Lengkap",
+          cls: complete ? "bg-teal-100 text-teal-800" : "bg-slate-100 text-slate-500"
+        };
+      }
+
+      const res = section === "A" ? evaluateQuestionA(idx) : evaluateQuestionB(idx);
+      if (res.isCorrect) {
+        return {
+          text: "✓ Cara & Jawaban Benar",
+          cls: "bg-emerald-100 text-emerald-800 border border-emerald-300"
+        };
+      }
+      if (section === "A") {
+        if (res.finalCorrect && (!res.multAllCorrect || !res.termsAllCorrect)) {
+          return {
+            text: "✗ Salah (Cara Belum Tepat)",
+            cls: "bg-rose-100 text-rose-800 border border-rose-300"
+          };
+        }
+      } else {
+        if (res.bitsAllCorrect && !res.stepsAllCorrect) {
+          return {
+            text: "✗ Salah (Cara Pembagian Salah)",
+            cls: "bg-rose-100 text-rose-800 border border-rose-300"
+          };
+        }
+      }
+      return {
+        text: "✗ Masih Salah",
+        cls: "bg-rose-100 text-rose-800 border border-rose-300"
+      };
+    }
+
+    function renderSectionA() {
+      const container = document.getElementById("listSectionA");
+      container.innerHTML = "";
+
+      SOAL_BINER_KE_DESIMAL.forEach((binStr, idx) => {
+        const digits = binStr.split("");
+        const itemState = appState.sectionA[idx];
+        const badgeInfo = getBadgeHtml("A", idx);
+
+        const card = document.createElement("div");
+        card.id = `cardA_${idx}`;
+        card.className = "bg-white rounded-xl shadow-xs border border-slate-200 p-4 sm:p-5 space-y-4 print-card transition";
+
+        const headerRow = document.createElement("div");
+        headerRow.className = "flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3";
+        headerRow.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white font-bold text-sm">${idx + 1}</span>
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Soal Biner ke Desimal</span>
+              <div class="text-base sm:text-lg font-bold text-slate-900">
+                Ubahlah bilangan biner <span class="font-mono-code px-2 py-0.5 rounded bg-teal-50 text-teal-800 border border-teal-200">${binStr}<sub class="text-xs">(2)</sub></span> ke desimal!
+              </div>
+            </div>
+          </div>
+          <span id="badgeA_${idx}" class="text-xs font-semibold px-2.5 py-1 rounded-full ${badgeInfo.cls}">
+            ${badgeInfo.text}
+          </span>
+        `;
+        card.appendChild(headerRow);
+
+        const templateBox = document.createElement("div");
+        templateBox.className = "bg-slate-50 rounded-xl p-3.5 border border-slate-200/80 space-y-4";
+
+        // Baris 1: 1 x [ ...] + 0 x [ ...]
+        const step1Wrap = document.createElement("div");
+        step1Wrap.className = "space-y-2";
+        const step1Title = document.createElement("div");
+        step1Title.className = "text-xs font-semibold text-slate-600";
+        step1Title.textContent = "Langkah 1 — Isi pengali nilai tempat (pangkat 2) untuk setiap digit:";
+        step1Wrap.appendChild(step1Title);
+
+        const multRow = document.createElement("div");
+        multRow.className = "flex flex-wrap items-center gap-1.5 sm:gap-2";
+
+        digits.forEach((digit, dIdx) => {
+          const group = document.createElement("div");
+          group.className = "inline-flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2 py-1.5";
+
+          const dSpan = document.createElement("span");
+          dSpan.className = "font-mono-code font-bold text-sm text-slate-900";
+          dSpan.textContent = `${digit} ×`;
+
+          const mInput = document.createElement("input");
+          mInput.type = "text";
+          mInput.inputMode = "numeric";
+          mInput.placeholder = "...";
+          mInput.value = itemState.multipliers[dIdx] || "";
+          mInput.className = "w-11 sm:w-12 px-1 py-0.5 text-center font-mono-code text-sm font-semibold rounded border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500";
+          mInput.addEventListener("input", (e) => {
+            appState.sectionA[idx].multipliers[dIdx] = e.target.value;
+            onUserModifyAnswer("A", idx);
+          });
+
+          group.appendChild(dSpan);
+          group.appendChild(mInput);
+          multRow.appendChild(group);
+
+          if (dIdx < digits.length - 1) {
+            const plus = document.createElement("span");
+            plus.className = "text-slate-400 font-bold text-sm";
+            plus.textContent = "+";
+            multRow.appendChild(plus);
+          }
+        });
+
+        step1Wrap.appendChild(multRow);
+        templateBox.appendChild(step1Wrap);
+
+        // Baris 2: Hasil perkalian tiap suku + Jawaban Akhir Desimal
+        const step2Wrap = document.createElement("div");
+        step2Wrap.className = "pt-3 border-t border-slate-200/70 space-y-2";
+
+        const step2Title = document.createElement("div");
+        step2Title.className = "text-xs font-semibold text-slate-600";
+        step2Title.textContent = "Langkah 2 — Tuliskan hasil perkalian di atas lalu jumlahkan:";
+        step2Wrap.appendChild(step2Title);
+
+        const sumRow = document.createElement("div");
+        sumRow.className = "flex flex-wrap items-center gap-1.5 sm:gap-2";
+
+        digits.forEach((_, dIdx) => {
+          const tInp = document.createElement("input");
+          tInp.type = "text";
+          tInp.inputMode = "numeric";
+          tInp.placeholder = "...";
+          tInp.value = itemState.terms[dIdx] || "";
+          tInp.className = "w-12 sm:w-14 px-2 py-1.5 text-center font-mono-code text-sm rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500";
+          tInp.addEventListener("input", (e) => {
+            appState.sectionA[idx].terms[dIdx] = e.target.value;
+            onUserModifyAnswer("A", idx);
+          });
+          sumRow.appendChild(tInp);
+
+          if (dIdx < digits.length - 1) {
+            const plus = document.createElement("span");
+            plus.className = "text-slate-400 font-bold text-sm";
+            plus.textContent = "+";
+            sumRow.appendChild(plus);
+          }
+        });
+
+        const eqSign = document.createElement("span");
+        eqSign.className = "text-slate-700 font-bold text-base px-1";
+        eqSign.textContent = "=";
+        sumRow.appendChild(eqSign);
+
+        const finalInp = document.createElement("input");
+        finalInp.type = "text";
+        finalInp.inputMode = "numeric";
+        finalInp.placeholder = "Jawaban";
+        finalInp.value = itemState.finalAnswer || "";
+        finalInp.className = "w-28 sm:w-32 px-3 py-1.5 text-center font-mono-code font-bold text-sm rounded-lg border-2 border-teal-600 bg-teal-50/40 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500";
+        finalInp.addEventListener("input", (e) => {
+          appState.sectionA[idx].finalAnswer = e.target.value;
+          onUserModifyAnswer("A", idx);
+        });
+        sumRow.appendChild(finalInp);
+
+        step2Wrap.appendChild(sumRow);
+        templateBox.appendChild(step2Wrap);
+
+        card.appendChild(templateBox);
+        container.appendChild(card);
+      });
+    }
+
+    function renderSectionB() {
+      const container = document.getElementById("listSectionB");
+      container.innerHTML = "";
+
+      SOAL_DESIMAL_KE_BINER.forEach((decVal, idx) => {
+        const itemState = appState.sectionB[idx];
+        const badgeInfo = getBadgeHtml("B", idx);
+
+        const card = document.createElement("div");
+        card.id = `cardB_${idx}`;
+        card.className = "bg-white rounded-xl shadow-xs border border-slate-200 p-4 sm:p-5 space-y-4 print-card transition";
+
+        const headerRow = document.createElement("div");
+        headerRow.className = "flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3";
+        headerRow.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-teal-800 text-white font-bold text-sm">${idx + 1}</span>
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Soal Desimal ke Biner</span>
+              <div class="text-base sm:text-lg font-bold text-slate-900">
+                Ubahlah bilangan desimal <span class="font-mono-code px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200">${decVal}<sub class="text-xs">(10)</sub></span> ke biner!
+              </div>
+            </div>
+          </div>
+          <span id="badgeB_${idx}" class="text-xs font-semibold px-2.5 py-1 rounded-full ${badgeInfo.cls}">
+            ${badgeInfo.text}
+          </span>
+        `;
+        card.appendChild(headerRow);
+
+        const templateBox = document.createElement("div");
+        templateBox.className = "bg-slate-50 rounded-xl p-3.5 border border-slate-200/80 space-y-4";
+
+        const stepTitle = document.createElement("div");
+        stepTitle.className = "text-xs font-semibold text-slate-600";
+        stepTitle.textContent = "Langkah Pembagian Berulang:";
+        templateBox.appendChild(stepTitle);
+
+        const stepsList = document.createElement("div");
+        stepsList.className = "space-y-2";
+
+        itemState.steps.forEach((st, sIdx) => {
+          const row = document.createElement("div");
+          row.className = "flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono-code text-sm bg-white border border-slate-200 rounded-lg px-3 py-2";
+
+          if (sIdx === 0) {
+            const firstDiv = document.createElement("span");
+            firstDiv.className = "w-12 text-center font-bold text-slate-900 bg-slate-100 rounded py-1 border border-slate-200";
+            firstDiv.textContent = decVal;
+            row.appendChild(firstDiv);
+          } else {
+            const divInp = document.createElement("input");
+            divInp.type = "text";
+            divInp.inputMode = "numeric";
+            divInp.placeholder = "...";
+            divInp.value = st.dividend || "";
+            divInp.className = "w-12 px-1 py-1 text-center font-bold rounded border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500";
+            divInp.addEventListener("input", (e) => {
+              appState.sectionB[idx].steps[sIdx].dividend = e.target.value;
+              onUserModifyAnswer("B", idx);
+            });
+            row.appendChild(divInp);
+          }
+
+          const slashSpan = document.createElement("span");
+          slashSpan.className = "font-bold text-slate-500";
+          slashSpan.textContent = "/";
+          row.appendChild(slashSpan);
+
+          const divisorInp = document.createElement("input");
+          divisorInp.type = "text";
+          divisorInp.inputMode = "numeric";
+          divisorInp.placeholder = "..";
+          divisorInp.value = st.divisor || "";
+          divisorInp.className = "w-10 px-1 py-1 text-center font-bold rounded border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500";
+          divisorInp.addEventListener("input", (e) => {
+            appState.sectionB[idx].steps[sIdx].divisor = e.target.value;
+            onUserModifyAnswer("B", idx);
+          });
+          row.appendChild(divisorInp);
+
+          const eqSpan = document.createElement("span");
+          eqSpan.className = "font-bold text-slate-500";
+          eqSpan.textContent = "=";
+          row.appendChild(eqSpan);
+
+          const quotInp = document.createElement("input");
+          quotInp.type = "text";
+          quotInp.inputMode = "numeric";
+          quotInp.placeholder = "...";
+          quotInp.value = st.quotient || "";
+          quotInp.className = "w-12 px-1 py-1 text-center font-bold rounded border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-500";
+          quotInp.addEventListener("input", (e) => {
+            appState.sectionB[idx].steps[sIdx].quotient = e.target.value;
+            onUserModifyAnswer("B", idx);
+          });
+          row.appendChild(quotInp);
+
+          const sisaSpan = document.createElement("span");
+          sisaSpan.className = "font-sans text-xs sm:text-sm font-semibold text-slate-600 px-1";
+          sisaSpan.textContent = "sisa";
+          row.appendChild(sisaSpan);
+
+          const remInp = document.createElement("input");
+          remInp.type = "text";
+          remInp.maxLength = 1;
+          remInp.inputMode = "numeric";
+          remInp.placeholder = "...";
+          remInp.value = st.remainder || "";
+          remInp.className = "w-11 px-1 py-1 text-center font-bold rounded border-2 border-amber-400 bg-amber-50/40 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500";
+          remInp.addEventListener("input", (e) => {
+            appState.sectionB[idx].steps[sIdx].remainder = e.target.value;
+            onUserModifyAnswer("B", idx);
+          });
+          row.appendChild(remInp);
+
+          stepsList.appendChild(row);
+        });
+
+        templateBox.appendChild(stepsList);
+
+        // Baris Jawaban .... .... .... ....
+        const ansWrap = document.createElement("div");
+        ansWrap.className = "pt-3 border-t border-slate-200/70 flex flex-wrap items-center gap-2";
+
+        const ansLabel = document.createElement("span");
+        ansLabel.className = "text-xs sm:text-sm font-bold text-teal-900 mr-1";
+        ansLabel.textContent = "Jawaban :";
+        ansWrap.appendChild(ansLabel);
+
+        itemState.answerBits.forEach((bitVal, bIdx) => {
+          const bitInp = document.createElement("input");
+          bitInp.type = "text";
+          bitInp.maxLength = 1;
+          bitInp.inputMode = "numeric";
+          bitInp.placeholder = "....";
+          bitInp.value = bitVal || "";
+          bitInp.className = "w-11 sm:w-12 py-1.5 text-center font-mono-code font-bold text-sm rounded-lg border-2 border-teal-600 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500";
+          bitInp.addEventListener("input", (e) => {
+            appState.sectionB[idx].answerBits[bIdx] = e.target.value;
+            onUserModifyAnswer("B", idx);
+          });
+          ansWrap.appendChild(bitInp);
+        });
+
+        templateBox.appendChild(ansWrap);
+        card.appendChild(templateBox);
+        container.appendChild(card);
+      });
+    }
+
+    function onUserModifyAnswer(section, idx) {
+      if (appState.isSubmitted) {
+        // Jika siswa mengubah jawaban setelah kumpul, sembunyikan nilai sampai dikumpulkan ulang
+        appState.isSubmitted = false;
+        updateScoreBanner();
+        refreshAllBadges();
+      } else {
+        updateSingleBadge(section, idx);
+      }
+      updateOverallProgress();
+      saveState();
+    }
+
+    function updateSingleBadge(section, idx) {
+      const badge = document.getElementById(`badge${section}_${idx}`);
+      if (!badge) return;
+      const info = getBadgeHtml(section, idx);
+      badge.textContent = info.text;
+      badge.className = `text-xs font-semibold px-2.5 py-1 rounded-full ${info.cls}`;
+    }
+
+    function refreshAllBadges() {
+      SOAL_BINER_KE_DESIMAL.forEach((_, idx) => updateSingleBadge("A", idx));
+      SOAL_DESIMAL_KE_BINER.forEach((_, idx) => updateSingleBadge("B", idx));
+    }
+
+    function updateOverallProgress() {
+      let count = 0;
+      SOAL_BINER_KE_DESIMAL.forEach((_, idx) => {
+        if (isQuestionAComplete(idx)) count++;
+      });
+      SOAL_DESIMAL_KE_BINER.forEach((_, idx) => {
+        if (isQuestionBComplete(idx)) count++;
+      });
+      const pct = Math.round((count / 30) * 100);
+      const textEl = document.getElementById("progressText");
+      const barEl = document.getElementById("progressBar");
+      if (textEl) textEl.textContent = `${count} / 30 Soal Lengkap (${pct}%)`;
+      if (barEl) barEl.style.width = `${pct}%`;
+    }
+
+    function updateScoreBanner() {
+      const banner = document.getElementById("scoreResultBanner");
+      if (!appState.isSubmitted) {
+        banner.classList.add("hidden");
+        return;
+      }
+
+      let correctA = 0;
+      let correctB = 0;
+
+      SOAL_BINER_KE_DESIMAL.forEach((_, idx) => {
+        if (evaluateQuestionA(idx).isCorrect) correctA++;
+      });
+      SOAL_DESIMAL_KE_BINER.forEach((_, idx) => {
+        if (evaluateQuestionB(idx).isCorrect) correctB++;
+      });
+
+      const totalCorrect = correctA + correctB;
+      const finalScore = Math.round((totalCorrect / 30) * 100);
+
+      const nameStr = appState.studentName.trim() || "Siswa";
+      const classStr = appState.studentClass ? ` (${appState.studentClass})` : "";
+      document.getElementById("scoreStudentSummary").textContent = `Hasil Evaluasi: ${nameStr}${classStr}`;
+      document.getElementById("finalScoreValue").textContent = finalScore;
+      document.getElementById("totalCorrectCount").textContent = `${totalCorrect} / 30`;
+      document.getElementById("secACorrectCount").textContent = `${correctA} / 15`;
+      document.getElementById("secBCorrectCount").textContent = `${correctB} / 15`;
+
+      banner.classList.remove("hidden");
+    }
+
+    function handleSubmitAnswers() {
+      appState.isSubmitted = true;
+      saveState();
+      refreshAllBadges();
+      updateScoreBanner();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Jawaban berhasil dikumpulkan! Nilai sudah ditampilkan.");
+    }
+
+    function applyTabState() {
+      const secA = document.getElementById("sectionAContainer");
+      const secB = document.getElementById("sectionBContainer");
+      const btnA = document.getElementById("tabBtnA");
+      const btnB = document.getElementById("tabBtnB");
+      const btnAll = document.getElementById("tabBtnAll");
+
+      const activeClass = "px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-white text-slate-900 shadow-sm";
+      const inactiveClass = "px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900";
+
+      btnA.className = appState.activeTab === "A" ? activeClass : inactiveClass;
+      btnB.className = appState.activeTab === "B" ? activeClass : inactiveClass;
+      btnAll.className = appState.activeTab === "ALL" ? activeClass : inactiveClass;
+
+      if (appState.activeTab === "A") {
+        secA.classList.remove("hidden");
+        secB.classList.add("hidden");
+      } else if (appState.activeTab === "B") {
+        secA.classList.add("hidden");
+        secB.classList.remove("hidden");
+      } else {
+        secA.classList.remove("hidden");
+        secB.classList.remove("hidden");
+      }
+    }
+
+    function applyGuideState() {
+      const panel = document.getElementById("guidePanel");
+      const label = document.getElementById("guideToggleLabel");
+      if (appState.showGuide) {
+        panel.classList.remove("hidden");
+        label.textContent = "Sembunyikan Panduan Cara";
+      } else {
+        panel.classList.add("hidden");
+        label.textContent = "Tampilkan Panduan Cara";
+      }
+    }
+
+    function wireControls() {
+      const nameInp = document.getElementById("studentName");
+      const classSel = document.getElementById("studentClass");
+      const absenInp = document.getElementById("studentAbsen");
+
+      nameInp.value = appState.studentName;
+      classSel.value = appState.studentClass;
+      absenInp.value = appState.studentAbsen;
+
+      nameInp.addEventListener("input", (e) => {
+        appState.studentName = e.target.value;
+        if (appState.isSubmitted) updateScoreBanner();
+        saveState();
+      });
+      classSel.addEventListener("change", (e) => {
+        appState.studentClass = e.target.value;
+        if (appState.isSubmitted) updateScoreBanner();
+        saveState();
+      });
+      absenInp.addEventListener("input", (e) => {
+        appState.studentAbsen = e.target.value;
+        saveState();
+      });
+
+      document.getElementById("tabBtnA").addEventListener("click", () => {
+        appState.activeTab = "A";
+        applyTabState();
+        saveState();
+      });
+      document.getElementById("tabBtnB").addEventListener("click", () => {
+        appState.activeTab = "B";
+        applyTabState();
+        saveState();
+      });
+      document.getElementById("tabBtnAll").addEventListener("click", () => {
+        appState.activeTab = "ALL";
+        applyTabState();
+        saveState();
+      });
+
+      document.getElementById("btnToggleGuide").addEventListener("click", () => {
+        appState.showGuide = !appState.showGuide;
+        applyGuideState();
+        saveState();
+      });
+
+      document.getElementById("btnSubmitTop").addEventListener("click", handleSubmitAnswers);
+      document.getElementById("btnSubmitBottom").addEventListener("click", handleSubmitAnswers);
+
+      document.getElementById("btnPrint").addEventListener("click", () => {
+        const prevTab = appState.activeTab;
+        appState.activeTab = "ALL";
+        applyTabState();
+        window.print();
+        appState.activeTab = prevTab;
+        applyTabState();
+      });
+
+      const resetModal = document.getElementById("resetModal");
+      document.getElementById("btnResetModal").addEventListener("click", () => {
+        resetModal.classList.remove("hidden");
+        resetModal.classList.add("flex");
+      });
+      document.getElementById("btnCancelReset").addEventListener("click", () => {
+        resetModal.classList.add("hidden");
+        resetModal.classList.remove("flex");
+      });
+      document.getElementById("btnConfirmReset").addEventListener("click", () => {
+        initDefaultState();
+        saveState();
+        renderSectionA();
+        renderSectionB();
+        updateOverallProgress();
+        updateScoreBanner();
+        resetModal.classList.add("hidden");
+        resetModal.classList.remove("flex");
+        showToast("Semua isian dan nilai berhasil direset");
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedState();
+      wireControls();
+      renderSectionA();
+      renderSectionB();
+      applyTabState();
+      applyGuideState();
+      updateOverallProgress();
+      updateScoreBanner();
+    });
+  </script>
+</body>
+</html>
