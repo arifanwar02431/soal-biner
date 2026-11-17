@@ -17,6 +17,38 @@
     .font-mono-code {
       font-family: 'JetBrains Mono', monospace;
     }
+    @keyframes popSpring {
+      0% { transform: scale(0.82); opacity: 0.4; }
+      60% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes floatBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes pulseGlowTeal {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.45); }
+      50% { box-shadow: 0 0 0 8px rgba(45, 212, 191, 0); }
+    }
+    @keyframes pulseGlowAmber {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(251, 191, 36, 0); }
+    }
+    .anim-pop {
+      animation: popSpring 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .anim-float {
+      animation: floatBounce 1.4s ease-in-out infinite;
+    }
+    .glow-teal {
+      animation: pulseGlowTeal 1.5s infinite;
+    }
+    .glow-amber {
+      animation: pulseGlowAmber 1.5s infinite;
+    }
+    .vid-box-transition {
+      transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
     @media print {
       .no-print {
         display: none !important;
@@ -153,31 +185,161 @@
       </button>
     </div>
 
-    <!-- Guide Panel (Contoh Cara sesuai format baru) -->
-    <section id="guidePanel" class="bg-amber-50/70 rounded-xl border border-amber-200 p-4 sm:p-5 space-y-3 print-card">
-      <div class="flex items-center gap-2 text-amber-900 font-bold text-sm sm:text-base">
-        <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-        <span>Panduan Pengisian Cara (Penting: Jika Cara Salah, Soal Dinilai Salah!)</span>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
-        <div class="bg-white rounded-lg p-3.5 border border-amber-200/80 space-y-1.5">
-          <p class="font-bold text-slate-900">1. Contoh Biner ke Desimal (Bagian A)</p>
-          <p>Misalkan soal biner <span class="font-mono-code font-bold text-teal-800">1101</span>:</p>
-          <div class="bg-slate-50 p-2 rounded border border-slate-200 font-mono-code text-xs space-y-1">
-            <div>Cara 1 (Pengali): 1×<strong>8</strong> + 1×<strong>4</strong> + 0×<strong>2</strong> + 1×<strong>1</strong></div>
-            <div>Cara 2 (Hasil Kali): <strong>8</strong> + <strong>4</strong> + <strong>0</strong> + <strong>1</strong> = <strong>13</strong></div>
+    <!-- Guide Panel (2 Video Animasi Interaktif Halus & Ramah Anak) -->
+    <section id="guidePanel" class="bg-gradient-to-br from-amber-50 via-orange-50/50 to-teal-50/40 rounded-2xl border-2 border-amber-200/90 p-4 sm:p-6 space-y-4 shadow-sm print-card">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-200/70 pb-3">
+        <div class="flex items-center gap-2.5 text-amber-950 font-extrabold text-sm sm:text-lg">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-amber-400 text-slate-950 text-lg shadow-xs shrink-0">🤖</span>
+          <div>
+            <span class="block">Bioskop Mini Koding: Tonton Cara Mengerjakan Soal!</span>
+            <span class="block text-xs font-medium text-amber-800">Animasi ini memakai langkah yang sama persis dengan lembar soal di bawah. Ingat: jika cara salah, soal dinilai salah!</span>
           </div>
-          <p class="text-xs text-slate-500">Isi sendiri angka pengali pangkat 2 dari kanan ke kiri (1, 2, 4, 8, 16, 32, 64, 128), lalu tulis hasil kalinya dan jumlahkan.</p>
         </div>
-        <div class="bg-white rounded-lg p-3.5 border border-amber-200/80 space-y-1.5">
-          <p class="font-bold text-slate-900">2. Contoh Desimal ke Biner (Bagian B)</p>
-          <p>Misalkan soal desimal <span class="font-mono-code font-bold text-amber-800">13</span>, bagi berulang dengan <strong>2</strong> hingga hasilnya <strong>0</strong>:</p>
-          <div class="bg-slate-50 p-2 rounded border border-slate-200 font-mono-code text-xs space-y-0.5">
-            <div>13 / <strong>2</strong> = <strong>6</strong> sisa <strong>1</strong></div>
-            <div><strong>6</strong> / <strong>2</strong> = <strong>3</strong> sisa <strong>0</strong></div>
-            <div><strong>3</strong> / <strong>2</strong> = <strong>1</strong> sisa <strong>1</strong></div>
-            <div><strong>1</strong> / <strong>2</strong> = <strong>0</strong> sisa <strong>1</strong></div>
-            <div class="pt-1 text-teal-800 font-bold">Jawaban (baca sisa dari bawah ke atas): <strong>1</strong> <strong>1</strong> <strong>0</strong> <strong>1</strong></div>
+        <button id="btnVidSound" type="button" class="no-print self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100/60 text-slate-700 border border-amber-300 text-xs font-bold shadow-2xs transition">
+          <span id="vidSoundIcon">🔊</span>
+          <span id="vidSoundLabel">Efek Suara: Aktif</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <!-- Video 1: Biner ke Desimal -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border-2 border-teal-200 shadow-sm space-y-3.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-extrabold">
+                🎬 VIDEO 1 • Bagian A (Biner ke Desimal)
+              </span>
+              <div class="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 no-print">
+                <span class="text-[11px] font-semibold text-slate-500 px-1.5">Contoh:</span>
+                <button id="btnVid1Ex0" type="button" class="px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-teal-600 text-white transition">1101</button>
+                <button id="btnVid1Ex1" type="button" class="px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition">10110</button>
+              </div>
+            </div>
+            <p class="font-extrabold text-slate-900 text-sm sm:text-base">Cara Mengisi Pengali Pangkat 2 (Dari Kanan ke Kiri)</p>
+          </div>
+
+          <!-- Interactive Video Player 1 -->
+          <div class="bg-slate-900 rounded-2xl p-4 text-white space-y-3.5 border border-slate-800 shadow-inner">
+            <!-- Header Bar inside Player -->
+            <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2.5">
+              <span id="vid1StepBadge" class="inline-flex items-center gap-1.5 font-mono-code text-teal-300 font-bold bg-teal-950/80 border border-teal-500/30 px-2.5 py-0.5 rounded-full">
+                Langkah 1 / 10
+              </span>
+              <span class="text-slate-300">Soal Biner: <strong id="vid1ProblemTitle" class="text-teal-300 font-mono-code text-sm">1101<sub>(2)</sub></strong></span>
+            </div>
+
+            <!-- Visual Stage Video 1 -->
+            <div class="min-h-[195px] flex flex-col justify-center space-y-3 py-1">
+              <!-- Pita Ketetapan Pengali Biner (Tetap & Tidak Berubah) -->
+              <div class="bg-slate-800/90 rounded-xl p-2.5 border border-teal-500/40 space-y-1.5">
+                <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+                  <span class="text-amber-300 font-extrabold uppercase tracking-wide">📌 Ketetapan Pengali Biner (Dari Kanan ke Kiri):</span>
+                  <span id="vid1DirArrow" class="text-teal-300 font-semibold">Selalu mulai dari 1, lalu dikali 2 (×2)</span>
+                </div>
+                <div id="vid1RuleStrip" class="flex flex-wrap items-center justify-end gap-1 font-mono-code text-[11px]"></div>
+              </div>
+
+              <div class="space-y-1.5">
+                <div class="text-[11px] text-slate-300 font-semibold">Langkah 1 — Isi kotak pengali di samping angka biner:</div>
+                <div id="vid1RowMult" class="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono-code text-xs sm:text-sm"></div>
+              </div>
+
+              <div class="space-y-1.5 pt-1 border-t border-slate-800/90">
+                <div class="text-[11px] text-slate-300 font-semibold">Langkah 2 — Tulis hasil perkaliannya lalu jumlahkan:</div>
+                <div id="vid1RowTerms" class="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono-code text-xs sm:text-sm"></div>
+              </div>
+            </div>
+
+            <!-- Kid-friendly Narrator Bubble -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-800/90 border border-teal-500/40 rounded-xl p-3 flex items-start gap-2.5 min-h-[60px]">
+              <span class="text-lg shrink-0 anim-float">🧑‍🏫</span>
+              <p id="vid1Caption" class="text-xs sm:text-[13px] text-amber-200 font-medium leading-snug">
+                Tekan tombol Putar Video untuk melihat animasi langkah demi langkah!
+              </p>
+            </div>
+
+            <!-- Step Dots & Controls -->
+            <div class="space-y-2.5 pt-1 no-print">
+              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden p-0.5">
+                <div id="vid1Progress" class="h-full bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 10%"></div>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <button id="btnVid1Play" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs shadow-xs transition">
+                    <span id="vid1PlayIcon">▶</span>
+                    <span id="vid1PlayText">Putar Video</span>
+                  </button>
+                  <button id="btnVid1Prev" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition">◀ Mundur</button>
+                  <button id="btnVid1Next" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition">Maju ▶</button>
+                </div>
+                <button id="btnVid1Reset" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">Ulangi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2: Desimal ke Biner -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border-2 border-amber-200 shadow-sm space-y-3.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-950 text-xs font-extrabold">
+                🎬 VIDEO 2 • Bagian B (Desimal ke Biner)
+              </span>
+              <div class="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 no-print">
+                <span class="text-[11px] font-semibold text-slate-500 px-1.5">Contoh:</span>
+                <button id="btnVid2Ex0" type="button" class="px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-amber-500 text-slate-950 transition">13</button>
+                <button id="btnVid2Ex1" type="button" class="px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition">19</button>
+              </div>
+            </div>
+            <p class="font-extrabold text-slate-900 text-sm sm:text-base">Cara Pembagian Berulang (/ 2) &amp; Menyusun Sisa dari Bawah</p>
+          </div>
+
+          <!-- Interactive Video Player 2 -->
+          <div class="bg-slate-900 rounded-2xl p-4 text-white space-y-3.5 border border-slate-800 shadow-inner">
+            <!-- Header Bar inside Player -->
+            <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2.5">
+              <span id="vid2StepBadge" class="inline-flex items-center gap-1.5 font-mono-code text-amber-300 font-bold bg-amber-950/80 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                Langkah 1 / 9
+              </span>
+              <span class="text-slate-300">Soal Desimal: <strong id="vid2ProblemTitle" class="text-amber-300 font-mono-code text-sm">13<sub>(10)</sub></strong></span>
+            </div>
+
+            <!-- Visual Stage Video 2 -->
+            <div class="min-h-[195px] flex flex-col justify-center space-y-2.5 py-1">
+              <!-- Pita Ketetapan Pembagi Biner -->
+              <div class="bg-slate-800/90 rounded-xl px-3 py-2 border border-amber-500/40 flex flex-wrap items-center justify-between gap-1 text-[11px]">
+                <span class="text-amber-300 font-extrabold uppercase tracking-wide">📌 Ketetapan Pembagi: Selalu Dibagi 2 (/ 2)</span>
+                <span class="text-teal-300 font-semibold">Karena biner berbasis 2 (sisa hanya 0 atau 1)</span>
+              </div>
+              <div id="vid2RowsContainer" class="space-y-1.5 font-mono-code text-xs"></div>
+              <div id="vid2AnswerRow" class="pt-2.5 border-t border-slate-800 flex flex-wrap items-center gap-1.5 font-mono-code text-xs"></div>
+            </div>
+
+            <!-- Kid-friendly Narrator Bubble -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-800/90 border border-amber-500/40 rounded-xl p-3 flex items-start gap-2.5 min-h-[60px]">
+              <span class="text-lg shrink-0 anim-float">🚀</span>
+              <p id="vid2Caption" class="text-xs sm:text-[13px] text-amber-200 font-medium leading-snug">
+                Tekan tombol Putar Video untuk melihat animasi pembagian berulang!
+              </p>
+            </div>
+
+            <!-- Video Controls -->
+            <div class="space-y-2.5 pt-1 no-print">
+              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden p-0.5">
+                <div id="vid2Progress" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 11%"></div>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <button id="btnVid2Play" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shadow-xs transition">
+                    <span id="vid2PlayIcon">▶</span>
+                    <span id="vid2PlayText">Putar Video</span>
+                  </button>
+                  <button id="btnVid2Prev" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition">◀ Mundur</button>
+                  <button id="btnVid2Next" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition">Maju ▶</button>
+                </div>
+                <button id="btnVid2Reset" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">Ulangi</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1049,9 +1211,675 @@
       });
     }
 
+
+    // ── LOGIKA 2 VIDEO TUTORIAL INTERAKTIF HALUS & RAMAH ANAK ──
+    let vidSoundEnabled = true;
+    let audioCtx = null;
+
+    function playStepChime(freq = 587.33, type = "sine", duration = 0.11) {
+      if (!vidSoundEnabled) return;
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Ignore audio errors
+      }
+    }
+
+    function playSuccessFanfare() {
+      if (!vidSoundEnabled) return;
+      playStepChime(523.25, "triangle", 0.12);
+      setTimeout(() => playStepChime(659.25, "triangle", 0.12), 110);
+      setTimeout(() => playStepChime(783.99, "triangle", 0.22), 220);
+    }
+
+    // Data Contoh Video 1 (Biner ke Desimal) — menjelaskan KETETAPAN PENGALI lalu dianimasikan satu kotak demi satu kotak
+    const FIXED_RULE_WEIGHTS = ["128", "64", "32", "16", "8", "4", "2", "1"];
+
+    const VID1_EXAMPLES = [
+      {
+        bin: "1101",
+        digits: ["1", "1", "0", "1"],
+        weights: ["8", "4", "2", "1"],
+        terms: ["8", "4", "0", "1"],
+        ans: "13",
+        frames: [
+          {
+            revW: [false, false, false, false],
+            focusW: -1,
+            ruleFocusWeight: "ALL",
+            revT: [false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "ATURAN TETAP PENGALI BINER: Pengali selalu punya ketetapan pasti dari KANAN ke KIRI, dimulai dari 1 lalu dikali 2 terus (1, 2, 4, 8, 16, 32, 64, 128). Urutan ini TIDAK BOLEH diubah!"
+          },
+          {
+            revW: [false, false, false, true],
+            focusW: 3,
+            ruleFocusWeight: "1",
+            revT: [false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Sesuai ketetapan, kotak PALING KANAN wajib diisi pengali pertama yaitu 1 (tidak peduli angka binernya 1 atau 0)."
+          },
+          {
+            revW: [false, false, true, true],
+            focusW: 2,
+            ruleFocusWeight: "2",
+            revT: [false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Geser ke kiri 1 langkah: sesuai ketetapan dikali 2 (1 × 2 = 2). Jadi kotak pengali kedua wajib diisi 2!"
+          },
+          {
+            revW: [false, true, true, true],
+            focusW: 1,
+            ruleFocusWeight: "4",
+            revT: [false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Geser ke kiri lagi: sesuai ketetapan dikali 2 lagi (2 × 2 = 4). Jadi kotak pengali ketiga wajib diisi 4!"
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: 0,
+            ruleFocusWeight: "8",
+            revT: [false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Geser ke paling kiri: dikali 2 lagi (4 × 2 = 8). Karena ada 4 digit biner, ketetapan pengalinya adalah 8, 4, 2, 1!"
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, false, false, false],
+            focusT: 0,
+            showAns: false,
+            text: "Sekarang Langkah 2 (kalikan angka biner dengan ketetapan pengalinya): kotak ke-1 adalah 1 × 8 = 8."
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, false, false],
+            focusT: 1,
+            showAns: false,
+            text: "Kotak ke-2: angka biner 1 dikali pengali 4 → 1 × 4 = 4."
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, true, false],
+            focusT: 2,
+            showAns: false,
+            text: "Kotak ke-3: meskipun pengalinya tetap 2, karena angka binernya 0 maka 0 × 2 = 0!"
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, true, true],
+            focusT: 3,
+            showAns: false,
+            text: "Kotak ke-4: angka biner 1 dikali pengali 1 → 1 × 1 = 1."
+          },
+          {
+            revW: [true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, true, true],
+            focusT: -1,
+            showAns: true,
+            text: "Terakhir, jumlahkan semua hasil kalinya: 8 + 4 + 0 + 1 = 13! Tulis 13 di kotak Jawaban 🎉"
+          }
+        ]
+      },
+      {
+        bin: "10110",
+        digits: ["1", "0", "1", "1", "0"],
+        weights: ["16", "8", "4", "2", "1"],
+        terms: ["16", "0", "4", "2", "0"],
+        ans: "22",
+        frames: [
+          {
+            revW: [false, false, false, false, false],
+            focusW: -1,
+            ruleFocusWeight: "ALL",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "KETETAPAN PENGALI: Ingat patokan tetap dari kanan ke kiri → 1, 2, 4, 8, 16, 32, 64, 128 (selalu dikali 2). Karena soal ini 5 digit, kita pakai 5 pengali pertama dari kanan!"
+          },
+          {
+            revW: [false, false, false, false, true],
+            focusW: 4,
+            ruleFocusWeight: "1",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Kotak paling kanan WAJIB diisi ketetapan pengali pertama yaitu 1 (walaupun digit binernya 0, pengalinya tetap 1)."
+          },
+          {
+            revW: [false, false, false, true, true],
+            focusW: 3,
+            ruleFocusWeight: "2",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Ke kiri dikali 2 (1 × 2 = 2): isi kotak pengali dengan 2."
+          },
+          {
+            revW: [false, false, true, true, true],
+            focusW: 2,
+            ruleFocusWeight: "4",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Ke kiri lagi dikali 2 (2 × 2 = 4): isi kotak pengali dengan 4."
+          },
+          {
+            revW: [false, true, true, true, true],
+            focusW: 1,
+            ruleFocusWeight: "8",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Ke kiri lagi dikali 2 (4 × 2 = 8): isi kotak pengali dengan 8."
+          },
+          {
+            revW: [true, true, true, true, true],
+            focusW: 0,
+            ruleFocusWeight: "16",
+            revT: [false, false, false, false, false],
+            focusT: -1,
+            showAns: false,
+            text: "Kotak ke-5 paling kiri dikali 2 lagi (8 × 2 = 16). Lengkap sudah ketetapan pengali 16, 8, 4, 2, 1!"
+          },
+          {
+            revW: [true, true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, true, true, true],
+            focusT: 99,
+            showAns: false,
+            text: "Kalikan tiap biner dengan ketetapan pengalinya: 1×16=16, 0×8=0, 1×4=4, 1×2=2, dan 0×1=0."
+          },
+          {
+            revW: [true, true, true, true, true],
+            focusW: -1,
+            ruleFocusWeight: "",
+            revT: [true, true, true, true, true],
+            focusT: -1,
+            showAns: true,
+            text: "Jumlahkan hasil kalinya: 16 + 0 + 4 + 2 + 0 = 22! Tulis 22 di kotak Jawaban 🎉"
+          }
+        ]
+      }
+    ];
+
+    let vid1ExIdx = 0;
+    let vid1Step = 0;
+    let vid1Timer = null;
+
+    function renderVideo1() {
+      const ex = VID1_EXAMPLES[vid1ExIdx];
+      const frame = ex.frames[vid1Step];
+      const totalFrames = ex.frames.length;
+
+      const badge = document.getElementById("vid1StepBadge");
+      const titleEl = document.getElementById("vid1ProblemTitle");
+      const ruleStrip = document.getElementById("vid1RuleStrip");
+      const rowMult = document.getElementById("vid1RowMult");
+      const rowTerms = document.getElementById("vid1RowTerms");
+      const caption = document.getElementById("vid1Caption");
+      const prog = document.getElementById("vid1Progress");
+      const playIcon = document.getElementById("vid1PlayIcon");
+      const playText = document.getElementById("vid1PlayText");
+      if (!rowMult || !rowTerms || !ruleStrip) return;
+
+      badge.textContent = `Langkah ${vid1Step + 1} / ${totalFrames}`;
+      titleEl.innerHTML = `${ex.bin}<sub>(2)</sub>`;
+      caption.textContent = frame.text;
+      prog.style.width = `${Math.round(((vid1Step + 1) / totalFrames) * 100)}%`;
+
+      // Render Pita Ketetapan Pengali (128, 64, 32, 16, 8, 4, 2, 1)
+      ruleStrip.innerHTML = "";
+      FIXED_RULE_WEIGHTS.forEach((rw, rIdx) => {
+        const isUsedInProblem = ex.weights.includes(rw);
+        const isFocusedRule = frame.ruleFocusWeight === "ALL" || frame.ruleFocusWeight === rw;
+
+        const pill = document.createElement("span");
+        pill.className = `vid-box-transition px-2 py-0.5 rounded border ${
+          isFocusedRule
+            ? "bg-amber-400 text-slate-950 border-amber-200 font-extrabold glow-amber scale-105"
+            : isUsedInProblem
+            ? "bg-teal-950 text-teal-300 border-teal-500/60 font-bold"
+            : "bg-slate-900 text-slate-500 border-slate-700/70"
+        }`;
+        pill.textContent = rw;
+        ruleStrip.appendChild(pill);
+
+        if (rIdx < FIXED_RULE_WEIGHTS.length - 1) {
+          const arrow = document.createElement("span");
+          arrow.className = "text-[10px] text-slate-400 font-bold";
+          arrow.textContent = "⬅";
+          ruleStrip.appendChild(arrow);
+        }
+      });
+
+      const startBadge = document.createElement("span");
+      startBadge.className = "ml-1 text-[10px] font-sans font-bold text-amber-300";
+      startBadge.textContent = "(Mulai)";
+      ruleStrip.appendChild(startBadge);
+
+      const exBtn0 = document.getElementById("btnVid1Ex0");
+      const exBtn1 = document.getElementById("btnVid1Ex1");
+      if (exBtn0 && exBtn1) {
+        exBtn0.className = vid1ExIdx === 0 ? "px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-teal-600 text-white transition" : "px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition";
+        exBtn1.className = vid1ExIdx === 1 ? "px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-teal-600 text-white transition" : "px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition";
+      }
+
+      if (vid1Timer) {
+        playIcon.textContent = "⏸";
+        playText.textContent = "Jeda Animasi";
+      } else {
+        playIcon.textContent = "▶";
+        playText.textContent = vid1Step === totalFrames - 1 ? "Putar Ulang" : "Putar Video";
+      }
+
+      rowMult.innerHTML = "";
+      ex.digits.forEach((d, i) => {
+        const revealed = frame.revW[i];
+        const focused = frame.focusW === i;
+        const wrap = document.createElement("div");
+        wrap.className = "relative inline-flex flex-col items-center";
+
+        const box = document.createElement("div");
+        box.className = `vid-box-transition inline-flex items-center gap-1 px-2 py-1.5 rounded-lg border ${
+          focused
+            ? "bg-teal-500/30 border-teal-300 glow-teal anim-pop scale-105"
+            : revealed
+            ? "bg-slate-800 border-teal-500/50"
+            : "bg-slate-900 border-slate-700 opacity-60"
+        }`;
+
+        const valText = revealed ? ex.weights[i] : "...";
+        const valCls = focused
+          ? "bg-teal-400 text-slate-950 font-extrabold"
+          : revealed
+          ? "bg-slate-950 text-teal-300 font-bold"
+          : "bg-slate-950 text-slate-500";
+
+        box.innerHTML = `
+          <span class="text-white font-bold">${d} ×</span>
+          <span class="px-2 py-0.5 rounded ${valCls}">${valText}</span>
+        `;
+        wrap.appendChild(box);
+        rowMult.appendChild(wrap);
+
+        if (i < ex.digits.length - 1) {
+          const plus = document.createElement("span");
+          plus.className = "text-slate-500 font-bold text-xs";
+          plus.textContent = "+";
+          rowMult.appendChild(plus);
+        }
+      });
+
+      rowTerms.innerHTML = "";
+      ex.terms.forEach((t, i) => {
+        const revealed = frame.revT[i];
+        const focused = frame.focusT === i || frame.focusT === 99;
+        const tSpan = document.createElement("span");
+        tSpan.className = `vid-box-transition px-2.5 py-1 rounded-lg border ${
+          focused
+            ? "bg-amber-400 text-slate-950 border-amber-200 font-extrabold glow-amber anim-pop"
+            : revealed
+            ? "bg-slate-800 border-slate-600 text-white font-bold"
+            : "bg-slate-950 border-slate-800 text-slate-600"
+        }`;
+        tSpan.textContent = revealed ? t : "...";
+        rowTerms.appendChild(tSpan);
+
+        if (i < ex.terms.length - 1) {
+          const plus = document.createElement("span");
+          plus.className = "text-slate-500 font-bold text-xs";
+          plus.textContent = "+";
+          rowTerms.appendChild(plus);
+        }
+      });
+
+      const eq = document.createElement("span");
+      eq.className = "text-slate-400 font-bold px-1";
+      eq.textContent = "=";
+      rowTerms.appendChild(eq);
+
+      const ansBox = document.createElement("span");
+      ansBox.className = `vid-box-transition px-3.5 py-1 rounded-xl border-2 font-extrabold ${
+        frame.showAns
+          ? "border-emerald-300 bg-emerald-400 text-slate-950 glow-teal anim-pop"
+          : "border-slate-700 bg-slate-950 text-slate-600"
+      }`;
+      ansBox.textContent = frame.showAns ? ex.ans : "Jawaban";
+      rowTerms.appendChild(ansBox);
+    }
+
+    function stopVideo1() {
+      if (vid1Timer) {
+        clearInterval(vid1Timer);
+        vid1Timer = null;
+      }
+      renderVideo1();
+    }
+
+    function togglePlayVideo1() {
+      const ex = VID1_EXAMPLES[vid1ExIdx];
+      if (vid1Timer) {
+        stopVideo1();
+        return;
+      }
+      if (vid1Step >= ex.frames.length - 1) vid1Step = 0;
+      playStepChime(523.25);
+      renderVideo1();
+      vid1Timer = setInterval(() => {
+        const curEx = VID1_EXAMPLES[vid1ExIdx];
+        if (vid1Step < curEx.frames.length - 1) {
+          vid1Step++;
+          if (vid1Step === curEx.frames.length - 1) {
+            playSuccessFanfare();
+          } else {
+            playStepChime(480 + vid1Step * 40);
+          }
+          renderVideo1();
+        } else {
+          stopVideo1();
+        }
+      }, 2400);
+      renderVideo1();
+    }
+
+    // Data Contoh Video 2 (Desimal ke Biner) — menjelaskan ketetapan pembagi 2 lalu menyusun sisa dari bawah ke atas
+    const VID2_EXAMPLES = [
+      {
+        dec: "13",
+        steps: [
+          { d: "13", div: "2", q: "6", r: "1" },
+          { d: "6", div: "2", q: "3", r: "0" },
+          { d: "3", div: "2", q: "1", r: "1" },
+          { d: "1", div: "2", q: "0", r: "1" }
+        ],
+        ansBits: ["1", "1", "0", "1"],
+        frames: [
+          { revRows: 0, focusRow: -1, carryRow: -1, revAnsCount: 0, focusRemRow: -1, text: "KETETAPAN DESIMAL KE BINER: Karena biner adalah bilangan berbasis 2, maka ketetapan pembaginya SELALU angka 2 (/ 2) sampai hasil baginya 0!" },
+          { revRows: 1, focusRow: 0, carryRow: -1, revAnsCount: 0, focusRemRow: -1, text: "Baris ke-1: Bagi 13 dengan ketetapan 2 → 13 / 2 = 6 sisa 1 (karena 6 × 2 = 12, sisanya 1)." },
+          { revRows: 2, focusRow: 1, carryRow: 1, revAnsCount: 0, focusRemRow: -1, text: "Baris ke-2: Pindahkan hasil bagi 6 ke depan, bagi lagi dengan ketetapan 2 → 6 / 2 = 3 sisa 0." },
+          { revRows: 3, focusRow: 2, carryRow: 2, revAnsCount: 0, focusRemRow: -1, text: "Baris ke-3: Pindahkan hasil bagi 3 ke depan, bagi lagi dengan ketetapan 2 → 3 / 2 = 1 sisa 1." },
+          { revRows: 4, focusRow: 3, carryRow: 3, revAnsCount: 0, focusRemRow: -1, text: "Baris ke-4: Pindahkan hasil bagi 1 ke depan, bagi 2 → 1 / 2 = 0 sisa 1. Karena hasil bagi sudah 0, selesai membagi!" },
+          { revRows: 4, focusRow: -1, carryRow: -1, revAnsCount: 1, focusRemRow: 3, text: "Ketetapan menyusun Jawaban: baca SISA dari PALING BAWAH ke ATAS! Ambil sisa baris ke-4 yaitu 1 ke kotak pertama." },
+          { revRows: 4, focusRow: -1, carryRow: -1, revAnsCount: 2, focusRemRow: 2, text: "Naik ke baris ke-3: ambil sisa 1 → tulis di kotak jawaban kedua!" },
+          { revRows: 4, focusRow: -1, carryRow: -1, revAnsCount: 3, focusRemRow: 1, text: "Naik ke baris ke-2: ambil sisa 0 → tulis di kotak jawaban ketiga!" },
+          { revRows: 4, focusRow: -1, carryRow: -1, revAnsCount: 4, focusRemRow: 0, text: "Terakhir baris ke-1 paling atas: ambil sisa 1 → tulis di kotak keempat. Jawabannya 1 1 0 1 🎉" }
+        ]
+      },
+      {
+        dec: "19",
+        steps: [
+          { d: "19", div: "2", q: "9", r: "1" },
+          { d: "9", div: "2", q: "4", r: "1" },
+          { d: "4", div: "2", q: "2", r: "0" },
+          { d: "2", div: "2", q: "1", r: "0" },
+          { d: "1", div: "2", q: "0", r: "1" }
+        ],
+        ansBits: ["1", "0", "0", "1", "1"],
+        frames: [
+          { revRows: 0, focusRow: -1, carryRow: -1, revAnsCount: 0, focusRemRow: -1, text: "KETETAPAN PEMBAGI: Ingat, selalu bagi berulang dengan angka 2 (/ 2) hingga hasil baginya 0!" },
+          { revRows: 1, focusRow: 0, carryRow: -1, revAnsCount: 0, focusRemRow: -1, text: "Baris 1: 19 dibagi ketetapan 2 → 19 / 2 = 9 sisa 1 (karena 9 × 2 = 18, sisa 1)." },
+          { revRows: 2, focusRow: 1, carryRow: 1, revAnsCount: 0, focusRemRow: -1, text: "Baris 2: Turunkan hasil bagi 9 ke depan → 9 / 2 = 4 sisa 1." },
+          { revRows: 3, focusRow: 2, carryRow: 2, revAnsCount: 0, focusRemRow: -1, text: "Baris 3: Turunkan hasil bagi 4 ke depan → 4 / 2 = 2 sisa 0." },
+          { revRows: 4, focusRow: 3, carryRow: 3, revAnsCount: 0, focusRemRow: -1, text: "Baris 4: Turunkan hasil bagi 2 ke depan → 2 / 2 = 1 sisa 0." },
+          { revRows: 5, focusRow: 4, carryRow: 4, revAnsCount: 0, focusRemRow: -1, text: "Baris 5: Turunkan hasil bagi 1 ke depan → 1 / 2 = 0 sisa 1 (hasil bagi sudah 0!)." },
+          { revRows: 5, focusRow: -1, carryRow: -1, revAnsCount: 5, focusRemRow: 99, text: "Sesuai ketetapan, susun angka SISA dari BAWAH ke ATAS (⬆): 1, 0, 0, 1, 1. Tulis di kotak Jawaban 🎉" }
+        ]
+      }
+    ];
+
+    let vid2ExIdx = 0;
+    let vid2Step = 0;
+    let vid2Timer = null;
+
+    function renderVideo2() {
+      const ex = VID2_EXAMPLES[vid2ExIdx];
+      const frame = ex.frames[vid2Step];
+      const totalFrames = ex.frames.length;
+
+      const badge = document.getElementById("vid2StepBadge");
+      const titleEl = document.getElementById("vid2ProblemTitle");
+      const rowsWrap = document.getElementById("vid2RowsContainer");
+      const ansWrap = document.getElementById("vid2AnswerRow");
+      const caption = document.getElementById("vid2Caption");
+      const prog = document.getElementById("vid2Progress");
+      const playIcon = document.getElementById("vid2PlayIcon");
+      const playText = document.getElementById("vid2PlayText");
+      if (!rowsWrap || !ansWrap) return;
+
+      badge.textContent = `Langkah ${vid2Step + 1} / ${totalFrames}`;
+      titleEl.innerHTML = `${ex.dec}<sub>(10)</sub>`;
+      caption.textContent = frame.text;
+      prog.style.width = `${Math.round(((vid2Step + 1) / totalFrames) * 100)}%`;
+
+      const exBtn0 = document.getElementById("btnVid2Ex0");
+      const exBtn1 = document.getElementById("btnVid2Ex1");
+      if (exBtn0 && exBtn1) {
+        exBtn0.className = vid2ExIdx === 0 ? "px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-amber-500 text-slate-950 transition" : "px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition";
+        exBtn1.className = vid2ExIdx === 1 ? "px-2 py-0.5 rounded text-xs font-mono-code font-bold bg-amber-500 text-slate-950 transition" : "px-2 py-0.5 rounded text-xs font-mono-code font-bold text-slate-600 hover:bg-slate-200 transition";
+      }
+
+      if (vid2Timer) {
+        playIcon.textContent = "⏸";
+        playText.textContent = "Jeda Animasi";
+      } else {
+        playIcon.textContent = "▶";
+        playText.textContent = vid2Step === totalFrames - 1 ? "Putar Ulang" : "Putar Video";
+      }
+
+      rowsWrap.innerHTML = "";
+      ex.steps.forEach((st, idx) => {
+        const revealed = idx < frame.revRows;
+        const isCurrent = frame.focusRow === idx;
+        const isRemFocused = frame.focusRemRow === idx || frame.focusRemRow === 99;
+
+        const row = document.createElement("div");
+        row.className = `vid-box-transition flex items-center gap-1.5 px-2.5 py-1 rounded-lg border ${
+          isCurrent
+            ? "bg-amber-500/20 border-amber-300 anim-pop"
+            : revealed
+            ? "bg-slate-800/90 border-slate-700"
+            : "bg-slate-900/60 border-slate-800 opacity-50"
+        }`;
+
+        const dVal = idx === 0 ? st.d : (revealed ? st.d : "...");
+        const divVal = revealed ? st.div : "..";
+        const qVal = revealed ? st.q : "...";
+        const rVal = revealed ? st.r : "...";
+
+        const dHighlight = frame.carryRow === idx ? "bg-teal-400 text-slate-950 font-extrabold px-1 rounded" : (revealed || idx === 0 ? "text-white font-bold" : "text-slate-600");
+
+        row.innerHTML = `
+          <span class="w-8 text-center ${dHighlight}">${dVal}</span>
+          <span class="text-slate-400">/</span>
+          <span class="w-6 text-center rounded bg-slate-950 py-0.5 ${revealed ? "text-teal-300 font-bold" : "text-slate-600"}">${divVal}</span>
+          <span class="text-slate-400">=</span>
+          <span class="w-8 text-center rounded bg-slate-950 py-0.5 ${isCurrent ? "text-emerald-300 font-extrabold" : revealed ? "text-white font-bold" : "text-slate-600"}">${qVal}</span>
+          <span class="font-sans text-[11px] text-slate-300 px-0.5">sisa</span>
+          <span class="w-7 text-center rounded py-0.5 border ${
+            isRemFocused
+              ? "bg-amber-400 text-slate-950 border-amber-200 font-extrabold glow-amber scale-110"
+              : revealed
+              ? "bg-amber-500/20 border-amber-400/80 text-amber-200 font-bold"
+              : "bg-slate-950 border-slate-800 text-slate-600"
+          }">${rVal}</span>
+          <span class="text-[10px] font-sans font-bold text-amber-300 ml-auto">${
+            isRemFocused ? `⬆ Ambil ke-${ex.steps.length - idx}` : ""
+          }</span>
+        `;
+        rowsWrap.appendChild(row);
+      });
+
+      ansWrap.innerHTML = `<span class="font-sans text-xs font-bold text-teal-300 mr-1">Jawaban :</span>`;
+      ex.ansBits.forEach((b, bIdx) => {
+        const bitShown = bIdx < frame.revAnsCount;
+        const bitJustAdded = bIdx === frame.revAnsCount - 1 && frame.revAnsCount > 0;
+        const bSpan = document.createElement("span");
+        bSpan.className = `vid-box-transition w-8 py-1 text-center rounded-lg border-2 font-extrabold ${
+          bitJustAdded
+            ? "border-amber-300 bg-amber-400 text-slate-950 glow-amber anim-pop"
+            : bitShown
+            ? "border-emerald-400 bg-emerald-500/25 text-emerald-200"
+            : "border-slate-700 bg-slate-950 text-slate-600"
+        }`;
+        bSpan.textContent = bitShown ? b : "....";
+        ansWrap.appendChild(bSpan);
+      });
+    }
+
+    function stopVideo2() {
+      if (vid2Timer) {
+        clearInterval(vid2Timer);
+        vid2Timer = null;
+      }
+      renderVideo2();
+    }
+
+    function togglePlayVideo2() {
+      const ex = VID2_EXAMPLES[vid2ExIdx];
+      if (vid2Timer) {
+        stopVideo2();
+        return;
+      }
+      if (vid2Step >= ex.frames.length - 1) vid2Step = 0;
+      playStepChime(523.25);
+      renderVideo2();
+      vid2Timer = setInterval(() => {
+        const curEx = VID2_EXAMPLES[vid2ExIdx];
+        if (vid2Step < curEx.frames.length - 1) {
+          vid2Step++;
+          if (vid2Step === curEx.frames.length - 1) {
+            playSuccessFanfare();
+          } else {
+            playStepChime(460 + vid2Step * 50);
+          }
+          renderVideo2();
+        } else {
+          stopVideo2();
+        }
+      }, 2300);
+      renderVideo2();
+    }
+
+    function wireVideoPlayers() {
+      const soundBtn = document.getElementById("btnVidSound");
+      if (soundBtn) {
+        soundBtn.addEventListener("click", () => {
+          vidSoundEnabled = !vidSoundEnabled;
+          document.getElementById("vidSoundIcon").textContent = vidSoundEnabled ? "🔊" : "🔇";
+          document.getElementById("vidSoundLabel").textContent = vidSoundEnabled ? "Efek Suara: Aktif" : "Efek Suara: Mati";
+          if (vidSoundEnabled) playStepChime(659.25);
+        });
+      }
+
+      document.getElementById("btnVid1Ex0").addEventListener("click", () => {
+        stopVideo1();
+        vid1ExIdx = 0;
+        vid1Step = 0;
+        playStepChime(523.25);
+        renderVideo1();
+      });
+      document.getElementById("btnVid1Ex1").addEventListener("click", () => {
+        stopVideo1();
+        vid1ExIdx = 1;
+        vid1Step = 0;
+        playStepChime(587.33);
+        renderVideo1();
+      });
+
+      document.getElementById("btnVid1Play").addEventListener("click", togglePlayVideo1);
+      document.getElementById("btnVid1Prev").addEventListener("click", () => {
+        stopVideo1();
+        vid1Step = Math.max(0, vid1Step - 1);
+        playStepChime(440);
+        renderVideo1();
+      });
+      document.getElementById("btnVid1Next").addEventListener("click", () => {
+        stopVideo1();
+        const maxStep = VID1_EXAMPLES[vid1ExIdx].frames.length - 1;
+        vid1Step = Math.min(maxStep, vid1Step + 1);
+        playStepChime(587.33);
+        renderVideo1();
+      });
+      document.getElementById("btnVid1Reset").addEventListener("click", () => {
+        stopVideo1();
+        vid1Step = 0;
+        playStepChime(392);
+        renderVideo1();
+      });
+
+      document.getElementById("btnVid2Ex0").addEventListener("click", () => {
+        stopVideo2();
+        vid2ExIdx = 0;
+        vid2Step = 0;
+        playStepChime(523.25);
+        renderVideo2();
+      });
+      document.getElementById("btnVid2Ex1").addEventListener("click", () => {
+        stopVideo2();
+        vid2ExIdx = 1;
+        vid2Step = 0;
+        playStepChime(587.33);
+        renderVideo2();
+      });
+
+      document.getElementById("btnVid2Play").addEventListener("click", togglePlayVideo2);
+      document.getElementById("btnVid2Prev").addEventListener("click", () => {
+        stopVideo2();
+        vid2Step = Math.max(0, vid2Step - 1);
+        playStepChime(440);
+        renderVideo2();
+      });
+      document.getElementById("btnVid2Next").addEventListener("click", () => {
+        stopVideo2();
+        const maxStep = VID2_EXAMPLES[vid2ExIdx].frames.length - 1;
+        vid2Step = Math.min(maxStep, vid2Step + 1);
+        playStepChime(587.33);
+        renderVideo2();
+      });
+      document.getElementById("btnVid2Reset").addEventListener("click", () => {
+        stopVideo2();
+        vid2Step = 0;
+        playStepChime(392);
+        renderVideo2();
+      });
+
+      renderVideo1();
+      renderVideo2();
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       loadSavedState();
       wireControls();
+      wireVideoPlayers();
       renderSectionA();
       renderSectionB();
       applyTabState();
